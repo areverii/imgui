@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.6)
 project(imgui)
 
+set(Vulkan_INCLUDE_DIRS
+	$ENV{VULKAN_SDK}/Include
+)
+
 add_library(imgui STATIC
         imgui.cpp
         imgui_demo.cpp
@@ -17,6 +21,10 @@ add_library(imgui STATIC
 target_include_directories(imgui PRIVATE
         ${PROJECT_SOURCE_DIR}/../GLFW/include
         ${PROJECT_SOURCE_DIR}
-        ${PROJECT_SOURCE_DIR}/backends)
+        ${PROJECT_SOURCE_DIR}/backends
+        ${Vulkan_INCLUDE_DIRS}
+)
+
+find_package(Vulkan REQUIRED)
 
 #target_compile_options(imgui PRIVATE -Wall -Wextra -Wno-deprecated-enum-enum-conversion)
